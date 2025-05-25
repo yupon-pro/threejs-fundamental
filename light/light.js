@@ -1,17 +1,18 @@
 import * as THREE from "three";
 
+console.log("CAN BE READ?")
 const width = 960;
 const height = 540;
 
 const renderer = new THREE.WebGLRenderer({
-  canvas: document.getElementById("canvas")
+  canvas: document.querySelector("#canvas")
 });
 
 renderer.setSize(width, height);
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, width/height, 1, 10000);
-camera.position.set(0, 0, +1000);
+camera.position.set(0, 0, 1000);
 
 const geometry = new THREE.SphereGeometry(250, 30, 30);
 const material = new THREE.MeshStandardMaterial({ color: 0x00FF00 });
@@ -22,8 +23,10 @@ scene.add(mesh);
 // spotlight.position.set(10, 100, 10);
 // scene.add(spotlight);
 
-const pointLight = new THREE.PointLight(0xFFFFFF, 2, 50, 1.0);
+const pointLight = new THREE.PointLight(0xFFFFFF, 2, 0); // 距離制限なし
+pointLight.position.set(500, 500, 500);
 scene.add(pointLight);
+
 
 // const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1);
 // directionalLight.position.set(2, 2, 2);
@@ -32,7 +35,7 @@ scene.add(pointLight);
 animate();
 
 function animate() {
-  mesh.rotation.y += 1;
+  mesh.rotation.y += 0.01;
 
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
